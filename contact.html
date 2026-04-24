@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Ecommerce Mineral Business Consultancy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/Fav_icon.png" type="image/png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/Logo-Transparent.png" alt="Ecommerce Mineral Logo">
+                <div class="logo-text">Ecommerce Mineral<span>Business Consultancy</span></div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="who-we-are.html">Who We Are</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="calculators.html">Calculator</a></li>
+                <li><a href="case-studies.html">Client Growth</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Contact Us</li>
+        </ol>
+    </nav>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title fade-in text-center">Contact Us</h2>
+                <p class="section-subtitle fade-in text-center">Ready to grow? Reach out and let's discuss how we can help your business thrive.</p>
+
+                <div class="contact-grid">
+                    <!-- Enquiry Form -->
+                    <div class="contact-form fade-in">
+                        <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Send an Enquiry</h3>
+                        <form onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will get back to you within 24 hours.');">
+                            <div class="form-group">
+                                <label for="contact-name">Name</label>
+                                <input type="text" id="contact-name" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input type="email" id="contact-email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-phone">Phone</label>
+                                <input type="tel" id="contact-phone" placeholder="+91 98765 43210">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" rows="5" placeholder="Tell us about your project..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info & Map -->
+                    <div>
+                        <div class="contact-info-block fade-in fade-in-delay-1">
+                            <h3>Contact Details</h3>
+                            <div class="info-item">
+                                <i>📞</i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <span>+91 98765 43210</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i>✉️</i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <span>hello@ecommercemineral.com</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i>📍</i>
+                                <div>
+                                    <strong>Office Address</strong>
+                                    <span>123 Business Park, Sector 62, Noida, Uttar Pradesh, India — 201301</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-block fade-in fade-in-delay-2" style="margin-bottom: 2rem;">
+                            <h3>Follow Us</h3>
+                            <div class="social-links" style="justify-content: flex-start; margin-top: 1rem;">
+                                <a href="#" aria-label="Facebook">f</a>
+                                <a href="#" aria-label="LinkedIn">in</a>
+                                <a href="#" aria-label="Instagram">ig</a>
+                            </div>
+                        </div>
+
+                        <div class="map-container fade-in fade-in-delay-3">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.1234567890123!2d77.35912345678901!3d28.627123456789012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM3JzM3LjYiTiA3N8KwMjEnMzIuOCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Office Location Map"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo-text" style="color:#fff;">Ecommerce Mineral<span>Business Consultancy</span></div>
+                <p>Your trusted partner in e-commerce growth. We help businesses thrive on Amazon, Etsy, eBay, and beyond.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="who-we-are.html">Who We Are</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="calculators.html">Calculator</a></li>
+                    <li><a href="case-studies.html">Client Growth</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="services/platform-management.html">Platform Management</a></li>
+                    <li><a href="services/web-design.html">Website Designing</a></li>
+                    <li><a href="services/performance-marketing.html">Performance Marketing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Enquiry</h4>
+                <form class="footer-form" onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="3" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-accent">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ecommerce Mineral Business Consultancy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

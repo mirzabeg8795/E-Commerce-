@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etsy Revenue Calculator | Ecommerce Mineral</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/Fav_icon.png" type="image/png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <img src="../images/Logo-Transparent.png" alt="Ecommerce Mineral Logo">
+                <div class="logo-text">Ecommerce Mineral<span>Business Consultancy</span></div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../who-we-are.html">Who We Are</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="../calculators.html" class="active">Calculator</a></li>
+                <li><a href="../case-studies.html">Client Growth</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../calculators.html">Calculator</a></li>
+            <li>Etsy Revenue Calculator</li>
+        </ol>
+    </nav>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title fade-in text-center">Etsy Revenue Calculator</h2>
+                <p class="section-subtitle fade-in text-center">Calculate your Etsy profit margin including all listing and transaction fees.</p>
+
+                <div class="calculator-card fade-in">
+                    <div class="calc-group">
+                        <label for="etsy-price">Selling Price ($)</label>
+                        <input type="number" id="etsy-price" value="40" min="0" step="0.01">
+                    </div>
+                    <div class="calc-group">
+                        <label for="etsy-cost">Product Cost ($)</label>
+                        <input type="number" id="etsy-cost" value="15" min="0" step="0.01">
+                    </div>
+                    <div class="calc-group">
+                        <label for="etsy-shipping">Shipping Cost ($)</label>
+                        <input type="number" id="etsy-shipping" value="5" min="0" step="0.01">
+                    </div>
+                    <div class="calc-result">
+                        <h4>Profit Margin</h4>
+                        <div class="value" id="etsy-result">--</div>
+                    </div>
+                </div>
+
+                <div class="service-detail fade-in" style="margin-top: 2rem;">
+                    <h3 style="margin-bottom:1rem;">Example Calculation</h3>
+                    <p style="color: var(--text-light); margin-bottom:1rem;">If you sell an item for <strong>$40</strong>, with a product cost of <strong>$15</strong> and shipping of <strong>$5</strong>:</p>
+                    <ul class="service-list">
+                        <li>Listing Fee: <strong>$0.20</strong></li>
+                        <li>Transaction Fee (6.5%): $40 × 6.5% = <strong>$2.60</strong></li>
+                        <li>Payment Processing (3% + $0.25): $40 × 3% + $0.25 = <strong>$1.45</strong></li>
+                        <li>Total Costs: $15 + $5 + $0.20 + $2.60 + $1.45 = <strong>$24.25</strong></li>
+                        <li>Net Profit: $40 − $24.25 = <strong>$15.75</strong></li>
+                        <li>Profit Margin: ($15.75 / $40) × 100 = <strong>39.38%</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo-text" style="color:#fff;">Ecommerce Mineral<span>Business Consultancy</span></div>
+                <p>Your trusted partner in e-commerce growth. We help businesses thrive on Amazon, Etsy, eBay, and beyond.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../who-we-are.html">Who We Are</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../calculators.html">Calculator</a></li>
+                    <li><a href="../case-studies.html">Client Growth</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="../services/platform-management.html">Platform Management</a></li>
+                    <li><a href="../services/web-design.html">Website Designing</a></li>
+                    <li><a href="../services/performance-marketing.html">Performance Marketing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Enquiry</h4>
+                <form class="footer-form" onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="3" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-accent">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ecommerce Mineral Business Consultancy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', initEtsyCalculator);</script>
+</body>
+</html>

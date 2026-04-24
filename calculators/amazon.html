@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Revenue Calculator | Ecommerce Mineral</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/Fav_icon.png" type="image/png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <img src="../images/Logo-Transparent.png" alt="Ecommerce Mineral Logo">
+                <div class="logo-text">Ecommerce Mineral<span>Business Consultancy</span></div>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../who-we-are.html">Who We Are</a></li>
+                <li><a href="../services.html">Services</a></li>
+                <li><a href="../calculators.html" class="active">Calculator</a></li>
+                <li><a href="../case-studies.html">Client Growth</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../calculators.html">Calculator</a></li>
+            <li>Amazon Revenue Calculator</li>
+        </ol>
+    </nav>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title fade-in text-center">Amazon Revenue Calculator</h2>
+                <p class="section-subtitle fade-in text-center">Instantly estimate your Amazon profit margin after all seller fees.</p>
+
+                <div class="calculator-card fade-in">
+                    <div class="calc-group">
+                        <label for="amz-price">Selling Price ($)</label>
+                        <input type="number" id="amz-price" value="50" min="0" step="0.01">
+                    </div>
+                    <div class="calc-group">
+                        <label for="amz-cost">Product Cost ($)</label>
+                        <input type="number" id="amz-cost" value="20" min="0" step="0.01">
+                    </div>
+                    <div class="calc-group">
+                        <label for="amz-fba">FBA Fee ($)</label>
+                        <input type="number" id="amz-fba" value="8" min="0" step="0.01">
+                    </div>
+                    <div class="calc-group">
+                        <label for="amz-referral">Referral Fee (%)</label>
+                        <input type="number" id="amz-referral" value="15" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="calc-result">
+                        <h4>Profit Margin</h4>
+                        <div class="value" id="amz-result">--</div>
+                    </div>
+                </div>
+
+                <div class="service-detail fade-in" style="margin-top: 2rem;">
+                    <h3 style="margin-bottom:1rem;">Example Calculation</h3>
+                    <p style="color: var(--text-light); margin-bottom:1rem;">If you sell an item for <strong>$50</strong>, with a product cost of <strong>$20</strong>, FBA fee of <strong>$8</strong>, and a <strong>15%</strong> referral fee:</p>
+                    <ul class="service-list">
+                        <li>Referral Fee: $50 × 15% = <strong>$7.50</strong></li>
+                        <li>Total Costs: $20 + $8 + $7.50 = <strong>$35.50</strong></li>
+                        <li>Net Profit: $50 − $35.50 = <strong>$14.50</strong></li>
+                        <li>Profit Margin: ($14.50 / $50) × 100 = <strong>29.00%</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo-text" style="color:#fff;">Ecommerce Mineral<span>Business Consultancy</span></div>
+                <p>Your trusted partner in e-commerce growth. We help businesses thrive on Amazon, Etsy, eBay, and beyond.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../who-we-are.html">Who We Are</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../calculators.html">Calculator</a></li>
+                    <li><a href="../case-studies.html">Client Growth</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="../services/platform-management.html">Platform Management</a></li>
+                    <li><a href="../services/web-design.html">Website Designing</a></li>
+                    <li><a href="../services/performance-marketing.html">Performance Marketing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Enquiry</h4>
+                <form class="footer-form" onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="3" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-accent">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ecommerce Mineral Business Consultancy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', initAmazonCalculator);</script>
+</body>
+</html>
