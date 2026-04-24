@@ -8,7 +8,27 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initTestimonialCarousel();
     initBreadcrumbActiveState();
+    initHeaderScroll();
 });
+
+/* ============================================
+   Header Scroll Effect
+   ============================================ */
+function initHeaderScroll() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    function onScroll() {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
 
 /* ============================================
    Mobile Menu Toggle
@@ -16,21 +36,47 @@ document.addEventListener('DOMContentLoaded', function() {
 function initMobileMenu() {
     const toggle = document.querySelector('.mobile-toggle');
     const menu = document.querySelector('.nav-menu');
+    const backdrop = document.querySelector('.mobile-backdrop');
     if (!toggle || !menu) return;
 
+    function openMenu() {
+        toggle.classList.add('open');
+        menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        if (backdrop) backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        toggle.classList.remove('open');
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        if (backdrop) backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
     toggle.addEventListener('click', function() {
-        this.classList.toggle('open');
-        menu.classList.toggle('open');
-        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        if (menu.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
+
+    if (backdrop) {
+        backdrop.addEventListener('click', closeMenu);
+    }
 
     // Close menu when clicking a link
     menu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            toggle.classList.remove('open');
-            menu.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
+            closeMenu();
+        }
     });
 }
 
