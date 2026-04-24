@@ -1,14 +1,52 @@
 /* ============================================
+   Include Loader (Header & Footer)
+   ============================================ */
+function getBasePath() {
+    const path = window.location.pathname;
+    if (path.includes('/services/') || path.includes('/calculators/')) {
+        return '../';
+    }
+    return '';
+}
+
+async function loadIncludes() {
+    const base = getBasePath();
+    const headerPlaceholder = document.getElementById('header-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+    
+    if (headerPlaceholder) {
+        try {
+            const resp = await fetch(base + 'header.html');
+            const html = await resp.text();
+            headerPlaceholder.outerHTML = html;
+        } catch (e) {
+            console.error('Failed to load header', e);
+        }
+    }
+    
+    if (footerPlaceholder) {
+        try {
+            const resp = await fetch(base + 'footer.html');
+            const html = await resp.text();
+            footerPlaceholder.outerHTML = html;
+        } catch (e) {
+            console.error('Failed to load footer', e);
+        }
+    }
+}
+
+/* ============================================
    Ecommerce Mineral Business Consultancy
    Global JavaScript
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadIncludes();
+    initHeaderScroll();
     initMobileMenu();
     initScrollAnimations();
     initTestimonialCarousel();
     initBreadcrumbActiveState();
-    initHeaderScroll();
 });
 
 /* ============================================
