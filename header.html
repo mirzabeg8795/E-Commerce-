@@ -2,20 +2,101 @@
     <div class="header-inner">
         <a href="index.html" class="logo">
             <img src="images/Logo-Transparent.png" alt="Ecommerce Mineral Logo">
-            <div class="logo-text">Ecommerce Mineral<span>Business Consultancy</span></div>
         </a>
-        <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="who-we-are.html">Who We Are</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="calculators.html">Calculator</a></li>
-            <li><a href="case-studies.html">Client Growth</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="contact.html" class="btn btn-primary nav-cta">Get Started</a></li>
-        </ul>
+
+        <nav class="pill-nav">
+            <ul class="pill-nav-list">
+                <li class="pill-nav-item active" data-index="0">
+                    <a href="index.html">
+                        <span class="pill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        </span>
+                        <span class="pill-text">Home</span>
+                    </a>
+                </li>
+                <li class="pill-nav-item" data-index="1">
+                    <a href="who-we-are.html">
+                        <span class="pill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </span>
+                        <span class="pill-text">About</span>
+                    </a>
+                </li>
+                <li class="pill-nav-item" data-index="2">
+                    <a href="services.html">
+                        <span class="pill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </span>
+                        <span class="pill-text">Services</span>
+                    </a>
+                </li>
+                <li class="pill-nav-item" data-index="3">
+                    <a href="calculators.html">
+                        <span class="pill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
+                        </span>
+                        <span class="pill-text">Tools</span>
+                    </a>
+                </li>
+                <li class="pill-nav-item" data-index="4">
+                    <a href="contact.html">
+                        <span class="pill-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </span>
+                        <span class="pill-text">Contact</span>
+                    </a>
+                </li>
+                <div class="pill-indicator"></div>
+            </ul>
+        </nav>
+
+        <a href="contact.html" class="btn btn-primary nav-cta-desktop">Get Started</a>
     </div>
-    <div class="mobile-backdrop" aria-hidden="true"></div>
 </header>
+
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-pill-nav">
+    <ul class="mobile-pill-list">
+        <li class="active" data-index="0">
+            <a href="index.html">
+                <span class="mp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </span>
+                <span class="mp-text">Home</span>
+            </a>
+        </li>
+        <li data-index="1">
+            <a href="who-we-are.html">
+                <span class="mp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </span>
+                <span class="mp-text">About</span>
+            </a>
+        </li>
+        <li data-index="2">
+            <a href="services.html">
+                <span class="mp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </span>
+                <span class="mp-text">Services</span>
+            </a>
+        </li>
+        <li data-index="3">
+            <a href="calculators.html">
+                <span class="mp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
+                </span>
+                <span class="mp-text">Tools</span>
+            </a>
+        </li>
+        <li data-index="4">
+            <a href="contact.html">
+                <span class="mp-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </span>
+                <span class="mp-text">Contact</span>
+            </a>
+        </li>
+        <div class="mp-indicator"></div>
+    </ul>
+</nav>
