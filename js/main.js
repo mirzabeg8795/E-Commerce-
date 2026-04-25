@@ -37,7 +37,7 @@ async function loadIncludes() {
 
 function fixHeaderLinks(base) {
     if (!base) return;
-    document.querySelectorAll('.site-header a').forEach(link => {
+    document.querySelectorAll('.site-header a, .mobile-pill-nav a').forEach(link => {
         const href = link.getAttribute('href');
         if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/') && !href.startsWith('mailto:')) {
             link.setAttribute('href', base + href);
