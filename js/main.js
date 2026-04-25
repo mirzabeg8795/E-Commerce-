@@ -63,7 +63,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     initPillNav();
     initScrollAnimations();
     initTestimonialCarousel();
-    initActiveNavLinks();
+    // Add small delay to ensure nav links are fully loaded before setting active state
+    setTimeout(() => {
+        initActiveNavLinks();
+    }, 50);
     initCalculators();
 });
 
