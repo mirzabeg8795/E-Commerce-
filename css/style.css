@@ -1730,3 +1730,202 @@ a {
         font-size: 4.5rem;
     }
 }
+
+/* ============================================
+   Advanced Client Showcase Section
+   ============================================ */
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.showcase-card {
+    perspective: 1200px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.showcase-card:hover {
+    transform: translateY(-8px);
+}
+
+.browser-mockup {
+    background: #f8fafc;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.showcase-card:hover .browser-mockup {
+    box-shadow: 0 20px 60px rgba(30, 58, 95, 0.18);
+    transform: rotateX(2deg) scale(1.02);
+}
+
+.browser-header {
+    background: #e2e8f0;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.browser-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.browser-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f57;
+}
+
+.browser-dots span:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.browser-dots span:nth-child(3) {
+    background: #28ca42;
+}
+
+.browser-url {
+    flex: 1;
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #64748b;
+    font-family: monospace;
+    text-align: center;
+}
+
+.browser-content {
+    padding: 0;
+    overflow: hidden;
+}
+
+.browser-content img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: top center;
+    transition: all 6s ease-out;
+    display: block;
+}
+
+.showcase-card:hover .browser-content img {
+    object-position: bottom center;
+}
+
+.showcase-info {
+    padding: 1.25rem 0 0.5rem;
+    text-align: center;
+}
+
+.showcase-info h4 {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+    color: var(--primary);
+}
+
+.showcase-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.showcase-btn {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.showcase-card:hover .showcase-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Client Logo Marquee */
+.logo-marquee {
+    overflow: hidden;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.logo-marquee::before,
+.logo-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.logo-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-white), transparent);
+}
+
+.logo-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-white), transparent);
+}
+
+.logo-track {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 28s linear infinite;
+    width: fit-content;
+}
+
+.logo-item {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.logo-item:hover {
+    color: var(--primary);
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Responsive Showcase */
+@media (min-width: 640px) {
+    .showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .showcase-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+    
+    .browser-content img {
+        height: 260px;
+    }
+}
