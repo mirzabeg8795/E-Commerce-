@@ -1299,11 +1299,21 @@ a {
     justify-content: center;
     color: #fff;
     font-size: 0.9rem;
-    transition: var(--transition);
+    /* Ensure this variable is defined, or use 0.3s ease */
+    transition: var(--transition, all 0.3s ease); 
 }
 
 .social-links a:hover {
     background: var(--accent);
+    /* ANIMATION ADDITIONS BELOW */
+    transform: translateY(-5px) scale(1.1); /* Lifts the icon up and makes it slightly larger */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for a 3D effect */
+}
+
+/* Optional: Rotate the icon slightly on hover */
+.social-links a:hover i {
+    transform: rotate(360deg);
+    transition: transform 0.5s ease;
 }
 
 .footer-title {
