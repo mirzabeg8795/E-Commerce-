@@ -68,6 +68,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         initActiveNavLinks();
     }, 50);
     initCalculators();
+    
+    // ✅ Video Carousel Initialization (added here)
+    initVideoCarousel();
 });
 
 /* ============================================
@@ -199,172 +202,154 @@ function initActiveNavLinks() {
 }
 
 /* ============================================
-   Video Carousel
+   Video Carousel (Auto-scroll + Pause on Hover)
    ============================================ */
-(function() {
-  // DOM elements
-  const track = document.getElementById('carouselTrack');
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  const prevBtn = document.querySelector('.prev-btn');
-  const nextBtn = document.querySelector('.next-btn');
-  const wrapper = document.getElementById('carouselWrapper');
+function initVideoCarousel() {
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const wrapper = document.getElementById('carouselWrapper');
 
-  // Configuration
-  const ORIGINAL_SLIDE_COUNT = 3;
-  const TOTAL_SLIDES = slides.length;
-  const AUTO_INTERVAL_MS = 3200;
+    // Agar carousel elements exist nahi karte toh function se bahar nikal jayein
+    if (!track || !slides.length || !prevBtn || !nextBtn || !wrapper) return;
 
-  let currentIndex = 0;
-  let isTransitioning = false;
-  let autoInterval = null;
-  let isPaused = false;
+    const ORIGINAL_SLIDE_COUNT = 3;
+    const TOTAL_SLIDES = slides.length;
+    const AUTO_INTERVAL_MS = 3200;
 
-  // Get full slide width including gap
-  function getSlideFullWidth() {
-    if (!slides.length) return 320;
-    const gap = parseFloat(getComputedStyle(track).gap) || 28;
-    return slides[0].offsetWidth + gap;
-  }
+    let currentIndex = 0;
+    let isTransitioning = false;
+    let autoInterval = null;
+    let isPaused = false;
 
-  // Move to specific index (with or without animation)
-  function goToIndex(index, withAnimation = true) {
-    if (isTransitioning) return;
-    if (withAnimation) {
-      isTransitioning = true;
-      track.style.transition = 'transform 0.45s cubic-bezier(0.25, 0.92, 0.4, 1)';
-    } else {
-      track.style.transition = 'none';
+    function getSlideFullWidth() {
+        if (!slides.length) return 320;
+        const gap = parseFloat(getComputedStyle(track).gap) || 28;
+        return slides[0].offsetWidth + gap;
     }
 
-    const slideWidth = getSlideFullWidth();
-    track.style.transform = `translateX(${-(index * slideWidth)}px)`;
-    currentIndex = index;
-
-    if (!withAnimation) {
-      void track.offsetHeight;
-      track.style.transition = '';
-      isTransitioning = false;
+    function goToIndex(index, withAnimation = true) {
+        if (isTransitioning) return;
+        if (withAnimation) {
+            isTransitioning = true;
+            track.style.transition = 'transform 0.45s cubic-bezier(0.25, 0.92, 0.4, 1)';
+        } else {
+            track.style.transition = 'none';
+        }
+        const slideWidth = getSlideFullWidth();
+        track.style.transform = `translateX(${-(index * slideWidth)}px)`;
+        currentIndex = index;
+        if (!withAnimation) {
+            void track.offsetHeight;
+            track.style.transition = '';
+            isTransitioning = false;
+        }
     }
-  }
 
-  // Infinite loop after transition
-  function onTransitionEnd() {
-    if (!isTransitioning) return;
-    isTransitioning = false;
-
-    if (currentIndex >= ORIGINAL_SLIDE_COUNT) {
-      goToIndex(currentIndex - ORIGINAL_SLIDE_COUNT, false);
-    } else if (currentIndex < 0) {
-      goToIndex(currentIndex + ORIGINAL_SLIDE_COUNT, false);
+    function onTransitionEnd() {
+        if (!isTransitioning) return;
+        isTransitioning = false;
+        if (currentIndex >= ORIGINAL_SLIDE_COUNT) {
+            goToIndex(currentIndex - ORIGINAL_SLIDE_COUNT, false);
+        } else if (currentIndex < 0) {
+            goToIndex(currentIndex + ORIGINAL_SLIDE_COUNT, false);
+        }
     }
-  }
 
-  track.addEventListener('transitionend', onTransitionEnd);
+    track.addEventListener('transitionend', onTransitionEnd);
 
-  // Next / Prev
-  function nextSlide() {
-    if (isTransitioning) return;
-    let newIndex = currentIndex + 1;
-    if (newIndex >= TOTAL_SLIDES) newIndex = 0;
-    goToIndex(newIndex, true);
-    resetAutoTimer();
-  }
-
-  function prevSlide() {
-    if (isTransitioning) return;
-    let newIndex = currentIndex - 1;
-    if (newIndex < 0) newIndex = TOTAL_SLIDES - 1;
-    goToIndex(newIndex, true);
-    resetAutoTimer();
-  }
-
-  // Auto‑scroll control
-  function startAutoScroll() {
-    if (autoInterval) clearInterval(autoInterval);
-    autoInterval = setInterval(() => {
-      if (!isPaused && !isTransitioning) {
-        nextSlide();
-      }
-    }, AUTO_INTERVAL_MS);
-  }
-
-  function stopAutoScroll() {
-    if (autoInterval) {
-      clearInterval(autoInterval);
-      autoInterval = null;
+    function nextSlide() {
+        if (isTransitioning) return;
+        let newIndex = currentIndex + 1;
+        if (newIndex >= TOTAL_SLIDES) newIndex = 0;
+        goToIndex(newIndex, true);
+        resetAutoTimer();
     }
-  }
 
-  function resetAutoTimer() {
-    if (!isPaused) {
-      stopAutoScroll();
-      startAutoScroll();
+    function prevSlide() {
+        if (isTransitioning) return;
+        let newIndex = currentIndex - 1;
+        if (newIndex < 0) newIndex = TOTAL_SLIDES - 1;
+        goToIndex(newIndex, true);
+        resetAutoTimer();
     }
-  }
 
-  // Pause on hover / touch
-  function pauseCarousel() {
-    if (isPaused) return;
-    isPaused = true;
-    stopAutoScroll();
-  }
+    function startAutoScroll() {
+        if (autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(() => {
+            if (!isPaused && !isTransitioning) nextSlide();
+        }, AUTO_INTERVAL_MS);
+    }
 
-  function resumeCarousel() {
-    if (!isPaused) return;
-    isPaused = false;
-    startAutoScroll();
-  }
+    function stopAutoScroll() {
+        if (autoInterval) {
+            clearInterval(autoInterval);
+            autoInterval = null;
+        }
+    }
 
-  // Desktop hover
-  wrapper.addEventListener('mouseenter', pauseCarousel);
-  wrapper.addEventListener('mouseleave', resumeCarousel);
+    function resetAutoTimer() {
+        if (!isPaused) {
+            stopAutoScroll();
+            startAutoScroll();
+        }
+    }
 
-  // Mobile touch (avoid blocking buttons)
-  let touchTimer = null;
-  wrapper.addEventListener('touchstart', (e) => {
-    if (e.target.closest('.carousel-btn')) return;
-    pauseCarousel();
-    if (touchTimer) clearTimeout(touchTimer);
-  }, { passive: true });
+    function pauseCarousel() {
+        if (isPaused) return;
+        isPaused = true;
+        stopAutoScroll();
+    }
 
-  wrapper.addEventListener('touchend', () => {
-    if (touchTimer) clearTimeout(touchTimer);
-    touchTimer = setTimeout(() => {
-      resumeCarousel();
-    }, 300);
-  });
+    function resumeCarousel() {
+        if (!isPaused) return;
+        isPaused = false;
+        startAutoScroll();
+    }
 
-  // Button events
-  prevBtn.addEventListener('click', prevSlide);
-  nextBtn.addEventListener('click', nextSlide);
+    wrapper.addEventListener('mouseenter', pauseCarousel);
+    wrapper.addEventListener('mouseleave', resumeCarousel);
 
-  // Initialise carousel
-  function init() {
-    goToIndex(0, false);
-    startAutoScroll();
-    // Ensure videos autoplay (muted)
-    document.querySelectorAll('video').forEach(vid => {
-      vid.muted = true;
-      vid.play().catch(e => console.log('autoplay blocked – muted works', e));
+    let touchTimer = null;
+    wrapper.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.carousel-btn')) return;
+        pauseCarousel();
+        if (touchTimer) clearTimeout(touchTimer);
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', () => {
+        if (touchTimer) clearTimeout(touchTimer);
+        touchTimer = setTimeout(resumeCarousel, 300);
     });
-  }
 
-  // Recalculate position on window resize
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      if (isTransitioning) return;
-      const slideWidth = getSlideFullWidth();
-      track.style.transition = 'none';
-      track.style.transform = `translateX(${-(currentIndex * slideWidth)}px)`;
-      void track.offsetHeight;
-      track.style.transition = '';
-    }, 100);
-  });
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
 
-  init();
-})();
+    function init() {
+        goToIndex(0, false);
+        startAutoScroll();
+        document.querySelectorAll('video').forEach(vid => {
+            vid.muted = true;
+            vid.play().catch(e => console.log('autoplay blocked – muted works', e));
+        });
+    }
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            if (isTransitioning) return;
+            const slideWidth = getSlideFullWidth();
+            track.style.transition = 'none';
+            track.style.transform = `translateX(${-(currentIndex * slideWidth)}px)`;
+            void track.offsetHeight;
+            track.style.transition = '';
+        }, 100);
+    });
+
+    init();
+}
 
 /* ============================================
    Calculators
