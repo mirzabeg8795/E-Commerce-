@@ -2176,6 +2176,8 @@ a {
     }
 }
 
-
+.vc-carousel-btn {
+    display: none !important;   /* agar arrows nahi chahiye */
+}
 
 
