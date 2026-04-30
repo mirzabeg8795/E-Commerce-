@@ -1945,3 +1945,58 @@ a {
     overflow: hidden;
     width: 100%;
 }
+div#vcCarouselTrack {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  transform: translateX(0px);
+  flex-wrap: nowrap;
+}
+
+.vc-slide {
+  flex: 0 0 100%;
+  width: 677px;
+  max-width: 677px;
+  min-width: 677px;
+  box-sizing: border-box;
+}
+
+.vc-slide {
+  flex: 0 0 100%;
+  width: 677px;
+  max-width: 677px;
+  min-width: 677px;
+  box-sizing: border-box;
+}
+
+.vc-slide {
+  flex: 0 0 100%;
+  width: 677px;
+  max-width: 677px;
+  min-width: 677px;
+  box-sizing: border-box;
+}
+
+.vc-slide {
+  flex: 0 0 100%;
+  width: 677px;
+  max-width: 677px;
+  min-width: 677px;
+  box-sizing: border-box;
+}
+
+.vc-slide {
+  flex: 0 0 100%;
+  width: 677px;
+  max-width: 677px;
+  min-width: 677px;
+  box-sizing: border-box;
+}
+
+.vc-slide {
+  flex: 0 0 100%;
+  width: 677px;
+  max-width: 677px;
+  min-width: 677px;
+  box-sizing: border-box;
+}
