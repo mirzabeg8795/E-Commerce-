@@ -1937,9 +1937,202 @@ a {
         height: 260px;
     }
 }
-.vc-carousel-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; position: relative; }
-.vc-carousel { width: 100%; overflow: hidden; }
-.vc-carousel-track { display: flex; will-change: transform; }
-.vc-slide { flex: 0 0 auto; width: 320px; }
-@media (max-width: 768px) { .vc-slide { width: 260px; } }
-@media (max-width: 480px) { .vc-slide { width: 220px; } }
+/* ============================================
+   Video Carousel Styles - Safe Version (vc prefix)
+   ============================================ */
+
+.vc-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.vc-carousel-btn {
+    background: rgba(20, 20, 35, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    width: 48px;
+    height: 48px;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.vc-carousel-btn:hover {
+    background: rgba(210, 180, 255, 0.35);
+    border-color: rgba(210, 180, 255, 0.8);
+    transform: scale(1.05);
+}
+
+.vc-carousel {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 32px;
+    mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+    width: 100%;
+}
+
+.vc-carousel-track {
+    display: flex;
+    gap: 28px;
+    transition: transform 0.45s cubic-bezier(0.25, 0.92, 0.4, 1);
+    will-change: transform;
+}
+
+.vc-slide {
+    position: relative;
+    flex: 0 0 auto;
+    width: 320px;
+    height: 250px;
+    border-radius: 28px;
+    overflow: hidden;
+    transform: perspective(1000px) rotateY(-4deg);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s;
+    box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    cursor: pointer;
+}
+
+.vc-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 2px;
+    background: linear-gradient(125deg, rgba(210, 180, 255, 0), rgba(210, 180, 255, 0.4), rgba(210, 180, 255, 0));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.vc-slide:hover::after {
+    opacity: 1;
+}
+
+.vc-slide:hover {
+    transform: perspective(1000px) rotateY(0deg) scale(1.02) translateY(-6px);
+    box-shadow: 0 35px 55px -15px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(210, 180, 255, 0.5) inset;
+}
+
+.vc-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.vc-slide:hover video {
+    transform: scale(1.02);
+}
+
+.vc-slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5) 50%, transparent);
+    padding: 1.4rem 1.2rem 1rem;
+    backdrop-filter: blur(2px);
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+    transition: background 0.3s;
+}
+
+.vc-slide:hover .vc-slide-overlay {
+    background: linear-gradient(to top, rgba(20, 15, 35, 0.95), rgba(20, 15, 35, 0.7) 70%, transparent);
+}
+
+.vc-slide-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.vc-slide-title span {
+    background: rgba(255, 215, 150, 0.25);
+    backdrop-filter: blur(5px);
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 40px;
+}
+
+.vc-slide-desc {
+    font-size: 0.75rem;
+    color: rgba(255, 245, 240, 0.8);
+    margin-top: 6px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.vc-slide-desc i {
+    font-style: normal;
+    background: rgba(255, 255, 245, 0.15);
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.vc-carousel-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: rgba(180, 170, 210, 0.5);
+    font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .vc-carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.6rem;
+    }
+    .vc-slide {
+        width: 260px;
+        height: 200px;
+    }
+    .vc-carousel-track {
+        gap: 18px;
+    }
+    .vc-slide-overlay {
+        padding: 1rem 0.8rem 0.8rem;
+    }
+    .vc-slide-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .vc-slide {
+        width: 220px;
+        height: 170px;
+    }
+    .vc-carousel-track {
+        gap: 14px;
+    }
+    .vc-carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
+    }
+}
