@@ -2176,3 +2176,8 @@ a {
         font-size: 1.8rem;
     }
 }
+
+
+.vc-video {
+    cursor: pointer;
+}
