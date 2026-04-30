@@ -464,3 +464,55 @@ window.initEbayCalculator = initEbayCalculator;
         initVideoCarousel();
     }
 })();
+
+/* Video Modal - Open video on click */
+(function() {
+    const modal = document.getElementById('vcVideoModal');
+    const modalVideo = document.getElementById('vcModalVideo');
+    const closeBtn = document.querySelector('.vc-close-modal');
+
+    function openModal(videoSrc) {
+        if (!modal || !modalVideo) return;
+        modalVideo.src = videoSrc;
+        modalVideo.load();
+        modalVideo.play().catch(e => console.log('autoplay blocked in modal'));
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modalVideo.pause();
+        modalVideo.src = '';
+        modal.style.display = 'none';
+    }
+
+    // Attach click event to all carousel videos
+    function bindVideoClicks() {
+        const videos = document.querySelectorAll('.vc-slide-item .vc-video');
+        videos.forEach(video => {
+            // Remove existing listener to avoid duplicates
+            video.removeEventListener('click', videoClickHandler);
+            video.addEventListener('click', videoClickHandler);
+        });
+    }
+
+    function videoClickHandler(e) {
+        e.stopPropagation();
+        const video = e.currentTarget;
+        const src = video.querySelector('source')?.getAttribute('src');
+        if (src) {
+            openModal(src);
+        }
+    }
+
+    // Close modal events
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (modal) modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Re-run after carousel initializes (in case videos are added dynamically)
+    const observer = new MutationObserver(() => bindVideoClicks());
+    observer.observe(document.getElementById('vcCarouselTrack') || document.body, { childList: true, subtree: true });
+    bindVideoClicks();
+})();
