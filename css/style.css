@@ -1937,3 +1937,11 @@ a {
         height: 260px;
     }
 }
+.vc-carousel-wrapper {
+    overflow: visible;
+    width: 100%;
+}
+.vc-carousel {
+    overflow: hidden;
+    width: 100%;
+}
