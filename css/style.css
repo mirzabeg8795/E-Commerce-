@@ -1976,7 +1976,10 @@ a {
     border-color: rgba(210, 180, 255, 0.8);
     transform: scale(1.05);
 }*/
-
+/* Hide carousel navigation buttons */
+.vc-carousel-btn {
+    display: none !important;
+}
 .vc-carousel {
     flex: 1;
     overflow: hidden;
