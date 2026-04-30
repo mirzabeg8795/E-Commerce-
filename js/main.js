@@ -287,16 +287,15 @@ window.initAmazonCalculator = initAmazonCalculator;
 window.initEtsyCalculator = initEtsyCalculator;
 window.initEbayCalculator = initEbayCalculator;
 
-/* VIDEO CAROUSEL - Text below, optimized */
+
+/* VIDEO CAROUSEL - Full width, no arrows, text below, modal on click */
 (function() {
     function initVideoCarousel() {
         const track = document.getElementById('vcCarouselTrack');
         const slides = document.querySelectorAll('.vc-slide-item');
-        const prevBtn = document.querySelector('.vc-prev-btn');
-        const nextBtn = document.querySelector('.vc-next-btn');
         const wrapper = document.getElementById('vcCarouselWrapper');
-        
-        if (!track || slides.length === 0 || !prevBtn || !nextBtn || !wrapper) {
+
+        if (!track || slides.length === 0 || !wrapper) {
             console.warn("Video carousel elements not found");
             return;
         }
@@ -364,14 +363,6 @@ window.initEbayCalculator = initEbayCalculator;
             resetAutoTimer();
         }
 
-        function prevSlide() {
-            if (isTransitioning) return;
-            let newIndex = currentIndex - 1;
-            if (newIndex < 0) newIndex = TOTAL_SLIDES - 1;
-            goToIndex(newIndex, true);
-            resetAutoTimer();
-        }
-
         function startAutoScroll() {
             if (autoInterval) clearInterval(autoInterval);
             autoInterval = setInterval(() => {
@@ -408,7 +399,7 @@ window.initEbayCalculator = initEbayCalculator;
 
         let touchTimer = null;
         wrapper.addEventListener('touchstart', (e) => {
-            if (e.target.closest('.vc-carousel-btn')) return;
+            // No buttons to check; just pause
             pauseCarousel();
             if (touchTimer) clearTimeout(touchTimer);
         }, { passive: true });
@@ -416,9 +407,6 @@ window.initEbayCalculator = initEbayCalculator;
             if (touchTimer) clearTimeout(touchTimer);
             touchTimer = setTimeout(resumeCarousel, 300);
         });
-
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
 
         function init() {
             goToIndex(0, false);
@@ -465,7 +453,7 @@ window.initEbayCalculator = initEbayCalculator;
     }
 })();
 
-/* Video Modal - Open video on click */
+/* Video Modal - Open video on click (unchanged) */
 (function() {
     const modal = document.getElementById('vcVideoModal');
     const modalVideo = document.getElementById('vcModalVideo');
@@ -486,11 +474,9 @@ window.initEbayCalculator = initEbayCalculator;
         modal.style.display = 'none';
     }
 
-    // Attach click event to all carousel videos
     function bindVideoClicks() {
         const videos = document.querySelectorAll('.vc-slide-item .vc-video');
         videos.forEach(video => {
-            // Remove existing listener to avoid duplicates
             video.removeEventListener('click', videoClickHandler);
             video.addEventListener('click', videoClickHandler);
         });
@@ -499,20 +485,20 @@ window.initEbayCalculator = initEbayCalculator;
     function videoClickHandler(e) {
         e.stopPropagation();
         const video = e.currentTarget;
-        const src = video.querySelector('source')?.getAttribute('src');
+        const source = video.querySelector('source');
+        const src = source ? source.getAttribute('src') : null;
         if (src) {
             openModal(src);
         }
     }
 
-    // Close modal events
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (modal) modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
 
-    // Re-run after carousel initializes (in case videos are added dynamically)
     const observer = new MutationObserver(() => bindVideoClicks());
-    observer.observe(document.getElementById('vcCarouselTrack') || document.body, { childList: true, subtree: true });
+    const track = document.getElementById('vcCarouselTrack');
+    observer.observe(track || document.body, { childList: true, subtree: true });
     bindVideoClicks();
 })();
