@@ -2092,9 +2092,7 @@ a {
 /* Responsive */
 @media (max-width: 768px) {
     .vc-carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.6rem;
+        display: none !important;
     }
     .vc-slide-item {
         width: 260px;
@@ -2121,9 +2119,7 @@ a {
         gap: 14px;
     }
     .vc-carousel-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.4rem;
+        display: none !important;
     }
 }
 
