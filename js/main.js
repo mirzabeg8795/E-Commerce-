@@ -287,19 +287,31 @@ window.initAmazonCalculator = initAmazonCalculator;
 window.initEtsyCalculator = initEtsyCalculator;
 window.initEbayCalculator = initEbayCalculator;
 
-/* VIDEO CAROUSEL - SAFE INIT (VC PREFIX) */
+/* VIDEO CAROUSEL - Text below, optimized */
 (function() {
     function initVideoCarousel() {
         const track = document.getElementById('vcCarouselTrack');
-        const slides = document.querySelectorAll('.vc-slide');
+        const slides = document.querySelectorAll('.vc-slide-item');
         const prevBtn = document.querySelector('.vc-prev-btn');
         const nextBtn = document.querySelector('.vc-next-btn');
         const wrapper = document.getElementById('vcCarouselWrapper');
         
         if (!track || slides.length === 0 || !prevBtn || !nextBtn || !wrapper) {
-            console.warn("Video carousel: elements not found");
+            console.warn("Video carousel elements not found");
             return;
         }
+
+        // Animate text on scroll (Intersection Observer)
+        const textElements = document.querySelectorAll('.vc-slide-text');
+        const textObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    textObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        textElements.forEach(el => textObserver.observe(el));
 
         const ORIGINAL_SLIDE_COUNT = 3;
         const TOTAL_SLIDES = slides.length;
@@ -411,10 +423,23 @@ window.initEbayCalculator = initEbayCalculator;
         function init() {
             goToIndex(0, false);
             startAutoScroll();
-            document.querySelectorAll('.vc-slide video').forEach(vid => {
-                vid.muted = true;
-                vid.play().catch(e => console.log('autoplay blocked', e));
-            });
+            // Lazy load videos only when they become visible
+            const videos = document.querySelectorAll('.vc-video');
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        const source = video.querySelector('source');
+                        if (source && !video.hasAttribute('data-loaded')) {
+                            video.load();
+                            video.setAttribute('data-loaded', 'true');
+                            video.play().catch(e => console.log('autoplay blocked'));
+                        }
+                        videoObserver.unobserve(video);
+                    }
+                });
+            }, { threshold: 0.1 });
+            videos.forEach(vid => videoObserver.observe(vid));
         }
 
         let resizeTimeout;
