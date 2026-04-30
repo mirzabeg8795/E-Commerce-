@@ -293,8 +293,8 @@ window.initEbayCalculator = initEbayCalculator;
     function initVideoCarousel() {
         const track = document.getElementById('vcCarouselTrack');
         const slides = document.querySelectorAll('.vc-slide-item');
-        const prevBtn = document.querySelector('.vc-prev-btn');
-        const nextBtn = document.querySelector('.vc-next-btn');
+        //const prevBtn = document.querySelector('.vc-prev-btn');
+        //const nextBtn = document.querySelector('.vc-next-btn');
         const wrapper = document.getElementById('vcCarouselWrapper');
         
         if (!track || slides.length === 0 || !prevBtn || !nextBtn || !wrapper) {
@@ -418,8 +418,9 @@ window.initEbayCalculator = initEbayCalculator;
             touchTimer = setTimeout(resumeCarousel, 300);
         });
 
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
+        //prevBtn.addEventListener('click', prevSlide);
+        //nextBtn.addEventListener('click', nextSlide);
+       
 
         function init() {
             goToIndex(0, false);
