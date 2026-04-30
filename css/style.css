@@ -1937,4 +1937,5 @@ a {
         height: 260px;
     }
 }
-
+.vc-carousel { overflow: hidden; }
+.vc-carousel-wrapper { overflow: hidden; }
