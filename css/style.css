@@ -1937,5 +1937,9 @@ a {
         height: 260px;
     }
 }
-.vc-carousel { overflow: hidden; }
-.vc-carousel-wrapper { overflow: hidden; }
+.vc-carousel-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; position: relative; }
+.vc-carousel { width: 100%; overflow: hidden; }
+.vc-carousel-track { display: flex; will-change: transform; }
+.vc-slide { flex: 0 0 auto; width: 320px; }
+@media (max-width: 768px) { .vc-slide { width: 260px; } }
+@media (max-width: 480px) { .vc-slide { width: 220px; } }
