@@ -2179,11 +2179,4 @@ a {
 
 
 
-.vc-carousel {
-    scroll-snap-type: x mandatory;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-}
-.vc-slide-item {
-    scroll-snap-align: start;
-}
+
