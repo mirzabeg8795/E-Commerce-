@@ -420,7 +420,38 @@ window.initEbayCalculator = initEbayCalculator;
 
         prevBtn.addEventListener('click', prevSlide);
         nextBtn.addEventListener('click', nextSlide);
-       
+               // ========== TOUCH SWIPE (MOBILE DRAG) ==========
+        let touchStartX = 0;
+        let touchStartIndex = 0;
+        let isSwiping = false;
+
+        wrapper.addEventListener('touchstart', (e) => {
+            if (e.target.closest('.vc-carousel-btn')) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartIndex = currentIndex;
+            isSwiping = true;
+            pauseCarousel(); // pause auto-scroll during swipe
+        }, { passive: false });
+
+        wrapper.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            const deltaX = e.touches[0].clientX - touchStartX;
+            const slideWidth = getSlideFullWidth();
+            const deltaIndex = Math.round(deltaX / slideWidth);
+            let newIndex = touchStartIndex - deltaIndex;
+            newIndex = Math.min(Math.max(newIndex, 0), TOTAL_SLIDES - 1);
+            if (newIndex !== currentIndex) {
+                goToIndex(newIndex, false); // instant move without animation
+            }
+            e.preventDefault(); // prevent page scroll while swiping carousel
+        }, { passive: false });
+
+        wrapper.addEventListener('touchend', () => {
+            if (!isSwiping) return;
+            isSwiping = false;
+            resetAutoTimer(); // resume auto-scroll after swipe
+        });
+        // ========== END TOUCH SWIPE ==========
 
         function init() {
             goToIndex(0, false);
