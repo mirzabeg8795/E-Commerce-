@@ -1938,7 +1938,7 @@ a {
     }
 }
 /* ============================================
-   Video Carousel Styles - Modified (Text lower, no shadow)
+   Video Carousel - Text below video, no shadow, animated
    ============================================ */
 
 .vc-carousel-wrapper {
@@ -1981,8 +1981,6 @@ a {
     flex: 1;
     overflow: hidden;
     border-radius: 32px;
-    mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
     width: 100%;
 }
 
@@ -1993,115 +1991,98 @@ a {
     will-change: transform;
 }
 
-.vc-slide {
-    position: relative;
+/* Slide item – video + text below */
+.vc-slide-item {
     flex: 0 0 auto;
     width: 320px;
+    background: transparent;
+    border-radius: 20px;
+    overflow: visible;
+}
+
+.vc-slide-video-wrapper {
+    width: 100%;
     height: 250px;
-    border-radius: 28px;
+    border-radius: 20px;
     overflow: hidden;
     transform: perspective(1000px) rotateY(-4deg);
     transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    /* box-shadow removed */
-    box-shadow: none;
-    cursor: pointer;
+    box-shadow: none; /* No shadow */
+    background: #f0f0f0;
 }
 
-/* Remove the after pseudo-element glow/shadow if wanted (keep subtle border on hover) */
-.vc-slide::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 28px;
-    padding: 2px;
-    background: linear-gradient(125deg, rgba(210, 180, 255, 0), rgba(210, 180, 255, 0.4), rgba(210, 180, 255, 0));
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-
-.vc-slide:hover::after {
-    opacity: 1;
-}
-
-.vc-slide:hover {
+.vc-slide-item:hover .vc-slide-video-wrapper {
     transform: perspective(1000px) rotateY(0deg) scale(1.02) translateY(-6px);
-    box-shadow: none; /* No shadow on hover either */
 }
 
-.vc-slide video {
+.vc-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
 
-.vc-slide:hover video {
+.vc-slide-item:hover .vc-video {
     transform: scale(1.02);
 }
 
-/* Overlay - moved lower, padding reduced, gradient softer */
-.vc-slide-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2) 60%, transparent);
-    padding: 0.5rem 1rem 0.8rem;
-    backdrop-filter: blur(2px);
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
-    transition: background 0.3s;
+/* Text container below video – animated fade-in on scroll */
+.vc-slide-text {
+    margin-top: 12px;
+    text-align: center;
+    padding: 0 5px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.vc-slide:hover .vc-slide-overlay {
-    background: linear-gradient(to top, rgba(20, 15, 35, 0.8), rgba(20, 15, 35, 0.4) 70%, transparent);
+.vc-slide-text.animated {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Title and description text slightly smaller and compact */
 .vc-slide-title {
     font-size: 1rem;
     font-weight: 600;
-    color: white;
+    color: var(--primary, #1E3A5F);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     flex-wrap: wrap;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .vc-slide-title span {
-    background: rgba(255, 215, 150, 0.25);
-    backdrop-filter: blur(5px);
+    background: rgba(212, 168, 67, 0.2);
     font-size: 0.65rem;
     padding: 2px 8px;
     border-radius: 40px;
+    color: var(--accent, #D4A843);
 }
 
 .vc-slide-desc {
     font-size: 0.7rem;
-    color: rgba(255, 245, 240, 0.85);
-    margin-top: 2px;
+    color: var(--text-secondary, #6B7280);
     display: flex;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
 .vc-slide-desc i {
     font-style: normal;
-    background: rgba(255, 255, 245, 0.15);
+    background: rgba(0, 0, 0, 0.05);
     padding: 2px 6px;
     border-radius: 20px;
 }
 
 .vc-carousel-note {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     font-size: 0.7rem;
-    color: rgba(180, 170, 210, 0.5);
+    color: rgba(0,0,0,0.4);
     font-weight: 300;
 }
 
@@ -2112,15 +2093,14 @@ a {
         height: 40px;
         font-size: 1.6rem;
     }
-    .vc-slide {
+    .vc-slide-item {
         width: 260px;
+    }
+    .vc-slide-video-wrapper {
         height: 200px;
     }
     .vc-carousel-track {
         gap: 18px;
-    }
-    .vc-slide-overlay {
-        padding: 0.3rem 0.8rem 0.6rem;
     }
     .vc-slide-title {
         font-size: 0.9rem;
@@ -2128,8 +2108,10 @@ a {
 }
 
 @media (max-width: 480px) {
-    .vc-slide {
+    .vc-slide-item {
         width: 220px;
+    }
+    .vc-slide-video-wrapper {
         height: 170px;
     }
     .vc-carousel-track {
