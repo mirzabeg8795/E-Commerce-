@@ -288,14 +288,16 @@ window.initEtsyCalculator = initEtsyCalculator;
 window.initEbayCalculator = initEbayCalculator;
 
 
-/* VIDEO CAROUSEL - Full width, no arrows, text below, modal on click */
+/* VIDEO CAROUSEL - Text below, optimized */
 (function() {
     function initVideoCarousel() {
         const track = document.getElementById('vcCarouselTrack');
         const slides = document.querySelectorAll('.vc-slide-item');
+        const prevBtn = document.querySelector('.vc-prev-btn');
+        const nextBtn = document.querySelector('.vc-next-btn');
         const wrapper = document.getElementById('vcCarouselWrapper');
-
-        if (!track || slides.length === 0 || !wrapper) {
+        
+        if (!track || slides.length === 0 || !prevBtn || !nextBtn || !wrapper) {
             console.warn("Video carousel elements not found");
             return;
         }
@@ -363,6 +365,14 @@ window.initEbayCalculator = initEbayCalculator;
             resetAutoTimer();
         }
 
+        function prevSlide() {
+            if (isTransitioning) return;
+            let newIndex = currentIndex - 1;
+            if (newIndex < 0) newIndex = TOTAL_SLIDES - 1;
+            goToIndex(newIndex, true);
+            resetAutoTimer();
+        }
+
         function startAutoScroll() {
             if (autoInterval) clearInterval(autoInterval);
             autoInterval = setInterval(() => {
@@ -399,7 +409,7 @@ window.initEbayCalculator = initEbayCalculator;
 
         let touchTimer = null;
         wrapper.addEventListener('touchstart', (e) => {
-            // No buttons to check; just pause
+            if (e.target.closest('.vc-carousel-btn')) return;
             pauseCarousel();
             if (touchTimer) clearTimeout(touchTimer);
         }, { passive: true });
@@ -407,6 +417,9 @@ window.initEbayCalculator = initEbayCalculator;
             if (touchTimer) clearTimeout(touchTimer);
             touchTimer = setTimeout(resumeCarousel, 300);
         });
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
 
         function init() {
             goToIndex(0, false);
@@ -453,7 +466,7 @@ window.initEbayCalculator = initEbayCalculator;
     }
 })();
 
-/* Video Modal - Open video on click (unchanged) */
+/* Video Modal - Open video on click */
 (function() {
     const modal = document.getElementById('vcVideoModal');
     const modalVideo = document.getElementById('vcModalVideo');
@@ -474,9 +487,11 @@ window.initEbayCalculator = initEbayCalculator;
         modal.style.display = 'none';
     }
 
+    // Attach click event to all carousel videos
     function bindVideoClicks() {
         const videos = document.querySelectorAll('.vc-slide-item .vc-video');
         videos.forEach(video => {
+            // Remove existing listener to avoid duplicates
             video.removeEventListener('click', videoClickHandler);
             video.addEventListener('click', videoClickHandler);
         });
@@ -485,20 +500,20 @@ window.initEbayCalculator = initEbayCalculator;
     function videoClickHandler(e) {
         e.stopPropagation();
         const video = e.currentTarget;
-        const source = video.querySelector('source');
-        const src = source ? source.getAttribute('src') : null;
+        const src = video.querySelector('source')?.getAttribute('src');
         if (src) {
             openModal(src);
         }
     }
 
+    // Close modal events
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
     if (modal) modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
 
+    // Re-run after carousel initializes (in case videos are added dynamically)
     const observer = new MutationObserver(() => bindVideoClicks());
-    const track = document.getElementById('vcCarouselTrack');
-    observer.observe(track || document.body, { childList: true, subtree: true });
+    observer.observe(document.getElementById('vcCarouselTrack') || document.body, { childList: true, subtree: true });
     bindVideoClicks();
 })();
